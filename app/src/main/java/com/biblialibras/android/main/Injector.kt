@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.biblialibras.android.bible.BuildersModule
+import com.biblialibras.android.bible.BibleAndroidInjectorsModule
 import com.biblialibras.android.repo.DatabaseModule
 import com.biblialibras.android.repo.VideosDao
 import com.squareup.inject.assisted.dagger2.AssistedModule
@@ -63,7 +63,7 @@ class TiviViewModelFactory @Inject constructor(
 }
 
 @Module
-class ShowDetailsModule {
+class ContextModule {
 
     @Provides
     fun provideContext(activity: NavMainActivity): Context = activity
@@ -71,15 +71,15 @@ class ShowDetailsModule {
 }
 
 @Module
-abstract class HomeBuilder {
+abstract class NavMainActivityInjector {
     @ContributesAndroidInjector(
         modules = [
             ViewModelBuilder::class,
-            ShowDetailsModule::class,
-            BuildersModule::class
+            ContextModule::class,
+            BibleAndroidInjectorsModule::class
         ]
     )
-    internal abstract fun bindDetailsActivity(): NavMainActivity
+    internal abstract fun navMainActivity(): NavMainActivity
 }
 
 // If I use:
@@ -92,7 +92,7 @@ abstract class HomeBuilder {
         AppAssistedModule::class,
         AppModule::class,
         DatabaseModule::class,
-        HomeBuilder::class // or BuildersModule
+        NavMainActivityInjector::class // or BuildersModule
     ]
 )
 @Singleton

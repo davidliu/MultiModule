@@ -6,7 +6,7 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
-abstract class BuildersModule {
+abstract class BibleAndroidInjectorsModule {
 
     @ContributesAndroidInjector
     abstract fun bibleFragment(): FragmentBible
