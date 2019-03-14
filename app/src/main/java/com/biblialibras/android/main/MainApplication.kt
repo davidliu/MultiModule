@@ -1,5 +1,6 @@
 package com.biblialibras.android.main
 
+import android.app.Activity
 import androidx.fragment.app.Fragment
 import androidx.multidex.MultiDexApplication
 import com.biblialibras.android.BuildConfig
@@ -15,21 +16,24 @@ import com.google.android.exoplayer2.upstream.cache.SimpleCache
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasActivityInjector
 import dagger.android.support.HasSupportFragmentInjector
 import jonathanfinerty.once.Once
 import okhttp3.OkHttpClient
 import java.io.File
-import dagger.android.DispatchingAndroidInjector
 import javax.inject.Inject
 
-class MainApplication : MultiDexApplication(), HasSupportFragmentInjector {
-
+class MainApplication : MultiDexApplication(), HasActivityInjector, HasSupportFragmentInjector {
     @Inject
     lateinit var fragmentDispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
 
-    override fun supportFragmentInjector(): AndroidInjector<Fragment>? {
-        return fragmentDispatchingAndroidInjector
-    }
+    @Inject
+    lateinit var activityDispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
+
+    override fun supportFragmentInjector(): AndroidInjector<Fragment>? = fragmentDispatchingAndroidInjector
+
+    override fun activityInjector(): AndroidInjector<Activity> = activityDispatchingAndroidInjector
 
     lateinit var component: SingletonComponent
 
