@@ -1,12 +1,14 @@
 package com.biblialibras.android.bible.main
 
 import com.airbnb.mvrx.*
-import com.biblialibras.android.common.mvrx.MvRxViewModel
 import com.biblialibras.android.bible.main.FragmentBible.Companion.MAX_NUM_OF_ELEMENTS
+import com.biblialibras.android.common.mvrx.MvRxViewModel
 import com.biblialibras.android.repo.VideoWithCount
 import com.biblialibras.android.repo.VideosDao
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
+import com.squareup.inject.assisted.dagger2.AssistedModule
+import dagger.Module
 
 data class BibleState(val listOfItems: Async<List<VideoWithCount>> = Loading()) : MvRxState
 
@@ -41,3 +43,7 @@ class ViewModelBible @AssistedInject constructor(
         }
     }
 }
+
+@AssistedModule
+@Module(includes = [AssistedInject_BibleModule::class])
+abstract class BibleModule

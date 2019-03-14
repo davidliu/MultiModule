@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.biblialibras.android.bible.BibleAndroidInjectorsModule
+import com.biblialibras.android.bible.main.BibleModule
 import com.biblialibras.android.repo.DatabaseModule
 import com.biblialibras.android.repo.VideosDao
 import com.squareup.inject.assisted.dagger2.AssistedModule
@@ -90,6 +91,7 @@ abstract class NavMainActivityInjector {
     modules = [
         AndroidSupportInjectionModule::class,
         AppAssistedModule::class,
+        BibleModule::class,
         AppModule::class,
         DatabaseModule::class,
         NavMainActivityInjector::class // or BuildersModule
