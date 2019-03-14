@@ -4,19 +4,16 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.biblialibras.android.bible.BuildersModule
-import com.biblialibras.android.bible.main.FragmentBible
 import com.biblialibras.android.repo.DatabaseModule
 import com.biblialibras.android.repo.VideosDao
 import com.squareup.inject.assisted.dagger2.AssistedModule
 import dagger.*
 import dagger.android.ContributesAndroidInjector
-import javax.inject.Singleton
 import dagger.android.support.AndroidSupportInjectionModule
-import dagger.multibindings.IntoMap
 import javax.inject.Inject
 import javax.inject.Provider
+import javax.inject.Singleton
 
 @AssistedModule
 @Module(includes = [AssistedInject_AppAssistedModule::class])
@@ -69,7 +66,7 @@ class TiviViewModelFactory @Inject constructor(
 class ShowDetailsModule {
 
     @Provides
-    fun provideActivity(activity: NavMainActivity): Context = activity
+    fun provideContext(activity: NavMainActivity): Context = activity
 
 }
 
